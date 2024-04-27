@@ -1,0 +1,34 @@
+.model small
+.stack 100h
+.data
+	text db "Stressed!", 0dh, 0ah, "$"
+	len equ $-text-3
+.code
+MAIN PROC
+ mov ax, @data
+ mov ds, ax
+ mov dx, offset text
+ mov ah, 09h
+ int 21h
+
+ mov cx, len / 2
+ lea si, text
+ lea di, text + len - 1
+
+reverse:
+ mov al, [si]
+ mov ah, [di]
+ mov [si], ah
+ mov [di], al
+ inc si
+ dec di
+ loop reverse
+
+ mov dx, offset text
+ mov ah, 09h
+ int 21h
+
+ mov ax, 4C00h
+ int 21h
+Main endp
+End main
