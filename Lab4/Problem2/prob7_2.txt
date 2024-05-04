@@ -1,0 +1,33 @@
+TITLE prob7_2.asm
+.model small
+.stack 0100h
+.data
+.code
+print proc
+mov cx, 0
+
+for_loop:
+ cmp cx, 5
+ jge exit_loop
+
+ mov dl, "*"
+ mov ah, 02h
+ int 21h
+
+ inc cx
+ jmp for_loop
+
+exit_loop:
+ ret
+print endp
+
+main proc
+call print
+
+mov ah, 01h
+int 21h
+
+mov ax, 4c00h
+int 21h
+main endp
+end main
