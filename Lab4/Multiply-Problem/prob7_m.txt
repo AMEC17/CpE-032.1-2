@@ -18,7 +18,7 @@ mov byte ptr[di], '$'
 mov bx, 10
 
 convert:
- xor dx, dx
+ mov dx, 0
  div bx
  add dl, '0'
  dec di
